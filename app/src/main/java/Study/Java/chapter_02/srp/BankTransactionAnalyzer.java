@@ -3,9 +3,6 @@
  */
 package Study.Java.chapter_02.srp;
 
-import Study.Java.chapter_02.cohesion.BankStatementProcessor;
-import Study.Java.chapter_02.cohesion.BankTransaction;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -14,27 +11,26 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankTransactionAnalyzerSRP {
+public class BankTransactionAnalyzer {
     private static final String RESOURCES = "app/src/main/resources/";
-    private static BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
 
     public static void main(String[] args) throws IOException {
-        final Study.Java.chapter_02.cohesion.BankStatementCSVParser bankStatementParser = new Study.Java.chapter_02.cohesion.BankStatementCSVParser();
+        final BankStatementCSVParser bankStatementParser = new BankStatementCSVParser();
 
         final String fileName = "bank-data-simple.csv";
         final Path path = Paths.get(RESOURCES + fileName);
         final List<String> lines = Files.readAllLines(path);
 
-        final List<Study.Java.chapter_02.cohesion.BankTransaction> bankTransactions = bankStatementParser.parseLinesFromCSV(lines);
+        final List<BankTransaction> bankTransactions = bankStatementParser.parseLinesFromCSV(lines);
 
         System.out.println("The total for all transactions is " + calculateTotalAmount(bankTransactions));
         System.out.println("Transactions in January " + selectInMonth(bankTransactions, Month.JANUARY));
 
     }
 
-    private static List<Study.Java.chapter_02.cohesion.BankTransaction> selectInMonth(List<Study.Java.chapter_02.cohesion.BankTransaction> bankTransactions, Month month) {
-        final List<Study.Java.chapter_02.cohesion.BankTransaction> bankTransactionsInMonth = new ArrayList<>();
-        for (final Study.Java.chapter_02.cohesion.BankTransaction bankTransaction : bankTransactions) {
+    private static List<BankTransaction> selectInMonth(List<BankTransaction> bankTransactions, Month month) {
+        final List<BankTransaction> bankTransactionsInMonth = new ArrayList<>();
+        for (final BankTransaction bankTransaction : bankTransactions) {
             if (bankTransaction.getDate().getMonth() == month) {
                 bankTransactionsInMonth.add(bankTransaction);
             }
@@ -42,7 +38,7 @@ public class BankTransactionAnalyzerSRP {
         return bankTransactionsInMonth;
     }
 
-    private static double calculateTotalAmount(List<Study.Java.chapter_02.cohesion.BankTransaction> bankTransactions) {
+    private static double calculateTotalAmount(List<BankTransaction> bankTransactions) {
         double total = 0;
         for (final BankTransaction bankTransaction : bankTransactions) {
             total += bankTransaction.getAmount();
