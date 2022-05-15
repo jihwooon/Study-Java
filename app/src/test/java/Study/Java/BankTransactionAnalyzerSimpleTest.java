@@ -3,7 +3,7 @@
  */
 package Study.Java;
 
-import Study.Java.chapter_02.BankTransactionAnalyzerSimple;
+import Study.Java.chapter_02.godClass.BankTransactionAnalyzerSimple;
 import org.junit.jupiter.api.Test;
 
 class BankTransactionAnalyzerSimpleTest {

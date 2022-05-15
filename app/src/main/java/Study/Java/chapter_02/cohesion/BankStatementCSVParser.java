@@ -1,4 +1,4 @@
-package Study.Java.chapter_02.SRP;
+package Study.Java.chapter_02.cohesion;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -22,7 +22,7 @@ public class BankStatementCSVParser {
 
     public List<BankTransaction> parseLinesFromCSV(final List<String> lines) {
         final List<BankTransaction> bankTransactions = new ArrayList<>();
-        for(final String line: lines) {
+        for (final String line : lines) {
             bankTransactions.add(parseFromCSV(line));
         }
         return bankTransactions;

@@ -1,4 +1,4 @@
-package Study.Java.chapter_02.SRP;
+package Study.Java.chapter_02.srp;
 
 import java.time.LocalDate;
 import java.util.Objects;
