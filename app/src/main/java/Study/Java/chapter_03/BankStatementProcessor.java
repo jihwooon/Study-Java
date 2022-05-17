@@ -14,7 +14,7 @@ public class BankStatementProcessor {
 
     public double summarizeTransactions(final BankTransactionSummarizer bankTransactionSummarizer) {
         double result = 0;
-        for(final BankTransaction bankTransaction : bankTransactions) {
+        for (final BankTransaction bankTransaction : bankTransactions) {
             result = bankTransactionSummarizer.summarize(result, bankTransaction);
         }
         return result;
@@ -50,7 +50,6 @@ public class BankStatementProcessor {
         return result;
     }
 
-
     public List<BankTransaction> findTransactions(final BankTransactionFilter bankTransactionFilter) {
         final List<BankTransaction> result = new ArrayList<>();
         for (final BankTransaction bankTransaction : bankTransactions) {
@@ -60,5 +59,6 @@ public class BankStatementProcessor {
         }
         return bankTransactions;
     }
+
 
 }
