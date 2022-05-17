@@ -12,22 +12,16 @@ public class BankStatementProcessor {
         this.bankTransactions = bankTransactions;
     }
 
-    public double calculateTotalAmount() {
-        double total = 0;
-        for (final BankTransaction bankTransaction : bankTransactions) {
-            total += bankTransaction.getAmount();
+    public double summarizeTransactions(final BankTransactionSummarizer bankTransactionSummarizer) {
+        double result = 0;
+        for(final BankTransaction bankTransaction : bankTransactions) {
+            result = bankTransactionSummarizer.summarize(result, bankTransaction);
         }
-        return total;
+        return result;
     }
 
     public double calculateTotalInMonth(final Month month) {
-        double total = 0;
-        for (final BankTransaction bankTransaction : bankTransactions) {
-            if (bankTransaction.getDate().getMonth() == month) {
-                total += bankTransaction.getAmount();
-            }
-        }
-        return total;
+        return summarizeTransactions((acc, bankTransactions) -> bankTransactions.getDate().getMonth() == month ? acc + bankTransactions.getAmount() : acc);
     }
 
     public double calculateTotalForCategory(final String category) {
@@ -40,16 +34,12 @@ public class BankStatementProcessor {
         return total;
     }
 
+    // 특정 금액 이상의 은행 거래 내역 찾기
     public List<BankTransaction> findTransactionsGreaterThanEqual(final int amount) {
-        final List<BankTransaction> result = new ArrayList<>();
-        for (final BankTransaction bankTransaction : bankTransactions) {
-            if (bankTransaction.getAmount() >= amount) {
-                result.add(bankTransaction);
-            }
-        }
-        return result;
+        return findTransactions(bankTransaction -> bankTransaction.getAmount() >= amount);
     }
 
+    //특정 월이나 금액을 입출금 내역 검색하기
     public List<BankTransaction> findTransactionsInMonthAndGreater(final Month month, final int amount) {
         final List<BankTransaction> result = new ArrayList<>();
         for (final BankTransaction bankTransaction : bankTransactions) {
@@ -60,6 +50,7 @@ public class BankStatementProcessor {
         return result;
     }
 
+
     public List<BankTransaction> findTransactions(final BankTransactionFilter bankTransactionFilter) {
         final List<BankTransaction> result = new ArrayList<>();
         for (final BankTransaction bankTransaction : bankTransactions) {
@@ -67,6 +58,7 @@ public class BankStatementProcessor {
                 result.add(bankTransaction);
             }
         }
-        return result;
+        return bankTransactions;
     }
+
 }
