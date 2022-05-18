@@ -10,19 +10,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BankTransactionTest {
 
+    @Test
+    void creation() {
 
-  @Test
-  void creation() {
+        BankTransaction bankTransaction = new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -100, "taco");
+        BankTransaction bankTransaction2 = new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -100, "taco");
 
-    BankTransaction bankTransaction = new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -100, "taco");
+        assertThat(bankTransaction.getDate()).isEqualTo(LocalDate.of(2017, Month.JANUARY, 30));
+        assertThat(bankTransaction.getAmount()).isEqualTo(-100);
+        assertThat(bankTransaction.getDescription()).isEqualTo("taco");
+        assertThat(bankTransaction).isEqualTo(bankTransaction2);
 
-    BankTransaction bankTransaction2 = new BankTransaction(LocalDate.of(2017, Month.JANUARY, 30), -100, "taco");
-
-    assertThat(bankTransaction.getDate()).isEqualTo(LocalDate.of(2017, Month.JANUARY, 30));
-    assertThat(bankTransaction.getAmount()).isEqualTo(-100);
-    assertThat(bankTransaction.getDescription()).isEqualTo("taco");
-    assertThat(bankTransaction).isEqualTo(bankTransaction2);
-
-  }
+    }
 
 }
