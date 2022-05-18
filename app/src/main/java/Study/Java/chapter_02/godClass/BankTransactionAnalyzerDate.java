@@ -16,15 +16,16 @@ public class BankTransactionAnalyzerDate {
     private static final String RESOURCES = "app/src/main/resources/";
 
     public static void main(String[] args) throws IOException {
-        final Path path = Paths.get(RESOURCES + "bank-data-simple.csv");
-        final List<String> lines = Files.readAllLines(path);
+        final Path path = Paths.get(RESOURCES + "bank-data-simple.csv"); // CSV 추출
+        final DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("dd-MM-yyyy"); // 날짜 패턴 추출
+        final List<String> lines = Files.readAllLines(path); // 파일을 불러와서 String 타입으로 List로 정리
         double total = 0;
-        final DateTimeFormatter DATE_PATTERN = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         for (final String line : lines) {
-            final String[] columns = line.split(",");
-            final LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN);
-            if (date.getMonth() == Month.JANUARY) {
+            final String[] columns = line.split(","); // 콤마 분리
+            System.out.println(columns[0] + " | " + columns[1] + " | " + columns[2]);
+            final LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN); // 날짜 추출
+            if (date.getMonth() == Month.JANUARY) { // 1월이면 총합 반환
                 final double amount = Double.parseDouble(columns[1]);
                 total += amount;
             }
