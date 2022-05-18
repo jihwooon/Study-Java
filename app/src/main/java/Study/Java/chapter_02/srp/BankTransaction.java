@@ -14,6 +14,7 @@ public class BankTransaction {
         this.description = description;
     }
 
+
     public LocalDate getDate() {
         return date;
     }
