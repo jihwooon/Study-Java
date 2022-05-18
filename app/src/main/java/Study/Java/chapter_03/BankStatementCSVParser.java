@@ -22,7 +22,9 @@ public class BankStatementCSVParser implements BankStatementParser {
 
     @Override
     public List<BankTransaction> parseLinesFrom(List<String> lines) {
-        return lines.stream().map(this::parseFrom).collect(toList());
+        return lines.stream()
+            .map(this::parseFrom)
+            .collect(toList());
     }
 
 }

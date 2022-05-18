@@ -10,6 +10,6 @@ class BankTransactionAnalyzerSimpleTest {
     @Test
     void appHasAGreeting() {
         BankTransactionAnalyzerSimple classUnderTest = new BankTransactionAnalyzerSimple();
-
     }
+
 }

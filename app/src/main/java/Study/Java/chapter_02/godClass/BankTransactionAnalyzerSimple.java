@@ -13,13 +13,18 @@ public class BankTransactionAnalyzerSimple {
     private static final String RESOURCES = "app/src/main/resources/";
 
     public static void main(String[] args) throws IOException {
-        final Path path = Paths.get(RESOURCES + "bank-data-simple.csv");
+
+        final Path path = Paths.get(RESOURCES + "bank-data-simple.csv"); //CSVParser 기능
+
         final List<String> lines = Files.readAllLines(path);
         double total = 0;
         for (final String line : lines) {
-             final String[] columns = line.split(",");
-             final double amount = Double.parseDouble(columns[1]);
-             total += amount;
+             final String[] columns = line.split(","); //콤마로 열 분리
+             final double amount = Double.parseDouble(columns[1]); // 금액을 double로 파싱
+
+          total += amount; // 총합
+
+          System.out.println(columns[0] + " | " + columns[1] + " | " + columns[2]);
         }
 
         System.out.println("The total for all transactions is " + total);
