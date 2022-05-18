@@ -11,7 +11,9 @@ public class MainApplication {
         final BankStatementParser bankStatementParser
                 = new BankStatementCSVParser();
 
-        bankStatementAnalyzer.analyze("bank-data-simple.csv", bankStatementParser);
+        final Exporter exporter = new HtmlExporter();
+
+        bankStatementAnalyzer.analyze("bank-data-simple.csv", bankStatementParser, exporter);
 
     }
 }

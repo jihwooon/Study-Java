@@ -13,7 +13,6 @@ public class BankStatementCSVParser implements BankStatementParser {
     @Override
     public BankTransaction parseFrom(String line) {
         final String[] columns = line.split(",");
-
         final LocalDate date = LocalDate.parse(columns[0], DATE_PATTERN);
         final double amount = Double.parseDouble(columns[1]);
 
