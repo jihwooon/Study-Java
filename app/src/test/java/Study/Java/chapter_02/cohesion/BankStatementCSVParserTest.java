@@ -21,6 +21,7 @@ import static org.mockito.Mockito.verify;
 class BankStatementCSVParserTest {
     private final BankStatementParser statementParser = new BankStatementCSVParser();
     private List<BankTransaction> Array_BankTransaction;
+    private String LINE = "30-01-2017,-50,Tesco";
     private String[] LIST_CSV = {"30-01-2017,-50,Tesco", "30-01-2017,-100,Deliveroo", "01-02-2017,6000,Salary"};
     private List<String> ARRAYS_LIST = Arrays.asList(LIST_CSV);
 
@@ -34,8 +35,6 @@ class BankStatementCSVParserTest {
     @Test
     @DisplayName("라인의 따른 Parse 확인")
     public void shouldParseOnCorrectLine() {
-        String LINE = "30-01-2017,-50,Tesco";
-
         final BankTransaction result = statementParser.parseFrom(LINE);
 
         assertThat(Array_BankTransaction.get(0).getDate()).isEqualTo(result.getDate());
@@ -70,14 +69,14 @@ class BankStatementCSVParserTest {
     }
 
     @Test
+    @DisplayName("MockingTest")
     void shouldMockingTest() {
-      List mockedList = mock(List.class);
+      BankStatementParser bankStatementParser = mock(BankStatementParser.class);
 
-      given(mockedList.get(0)).willReturn("one");
+      bankStatementParser.parseFrom(LINE);
+      bankStatementParser.parseLinesFrom(ARRAYS_LIST);
 
-      System.out.println(mockedList.get(0));
-
-      verify(mockedList).get(0);
-
+      verify(bankStatementParser).parseFrom(LINE);
+      verify(bankStatementParser).parseLinesFrom(ARRAYS_LIST);
     }
 }
