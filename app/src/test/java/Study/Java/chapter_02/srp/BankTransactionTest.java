@@ -1,5 +1,6 @@
 package Study.Java.chapter_02.srp;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -7,6 +8,7 @@ import java.time.Month;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("BankTransaction 클래")
 class BankTransactionTest {
 
     @Test
