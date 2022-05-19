@@ -13,6 +13,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 @DisplayName("BankStatementCSVParser 클래스")
 class BankStatementCSVParserTest {
@@ -38,6 +41,7 @@ class BankStatementCSVParserTest {
         assertThat(Array_BankTransaction.get(0).getDate()).isEqualTo(result.getDate());
         assertThat(Array_BankTransaction.get(0).getAmount()).isEqualTo(result.getAmount());
         assertThat(Array_BankTransaction.get(0).getDescription()).isEqualTo(result.getDescription());
+
     }
 
     @Test
@@ -62,6 +66,18 @@ class BankStatementCSVParserTest {
         assertThat(bankTransaction.getDate()).isEqualTo(Array_BankTransaction.get(0).getDate());
         assertThat(bankTransaction.getAmount()).isEqualTo(Array_BankTransaction.get(0).getAmount());
         assertThat(bankTransaction.getDescription()).isEqualTo(Array_BankTransaction.get(0).getDescription());
+
+    }
+
+    @Test
+    void shouldMockingTest() {
+      List mockedList = mock(List.class);
+
+      given(mockedList.get(0)).willReturn("one");
+
+      System.out.println(mockedList.get(0));
+
+      verify(mockedList).get(0);
 
     }
 }
